@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+.gradle
 .idea
 play_with_pipes.iml
 build

@@ -4,9 +4,15 @@ stage 'Dev'
 node ('docker-cloud') {
     checkout scm
     gradle 'clean build -x test'
-    dir('target') {stash name: 'war', includes: 'x.war'}
+    java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar'
 }
 
 def gradle(args) {
-    sh "usr/bin/gradle ${args}"
+    String gradleExecutablePath = tool('gradle2.14');
+    sh "${gradleExecutablePath} ${args}"
+}
+
+def java(args) {
+    String javaExecutablePath = tool('java8');
+    sh "${javaExecutablePath} ${args}"
 }
