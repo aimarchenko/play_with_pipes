@@ -5,7 +5,7 @@ node ('docker-cloud') {
     sh 'env';
     checkout scm
     gradle 'clean build -x test'
-    java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar'
+    java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log'
 }
 
 def gradle(args) {
