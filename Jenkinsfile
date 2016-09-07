@@ -9,7 +9,7 @@ node ('docker-cloud') {
 }
 
 def gradle(args) {
-    String gradleExecutablePath = tool('gradle2.14');
+    String gradleExecutablePath = tool('gradle30');
     sh "${gradleExecutablePath} ${args}"
 }
 
