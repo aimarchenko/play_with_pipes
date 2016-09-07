@@ -2,11 +2,23 @@ group 'com.issoft'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    baseName = 'play_with_pipes'
+    manifest {
+        manifest {
+            attributes 'Implementation-Title': 'Jenkins play with pipes',
+                    'Implementation-Version': version,
+                    'Main-Class':'com.issoft.Starter'
+        }
+    }
 }
 
 dependencies {
