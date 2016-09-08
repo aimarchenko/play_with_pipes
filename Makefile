@@ -1,4 +1,5 @@
 deploy-default:
+	mkdir /home/vagrant/release
 	mkdir /home/vagrant/release/default
 	rm /home/vagrant/release/default
 	cp ./build/libs /home/vagrant/release/default
