@@ -15,7 +15,7 @@ node ('docker-cloud') {
             try{
                 sh 'make deploy-default'
             } catch (err){
-                echo "${err}"
+                error "${err}"
             }
 
 //            java '-jar /home/vagrant/release/default/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
