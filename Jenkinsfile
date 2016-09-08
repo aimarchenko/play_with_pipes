@@ -7,20 +7,18 @@ node ('docker-cloud') {
             checkout scm
         }
 
-//        stage ('cleanup'){
-//            try {
-//                sh 'pkill -f \'play_with_pipes*\''
-//            } catch (err){
-//                echo "error during execution ${err}"
-//            }
-//        }
-
         stage('build'){
             gradle 'clean build -x test'
         }
 
         stage('deploy'){
-            java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
+            try{
+                sh 'make deploy-default'
+            } catch (err){
+                echo "${err}"
+            }
+
+//            java '-jar /home/vagrant/release/default/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }
 
     } catch (err){
@@ -44,7 +42,7 @@ def gradle(args) {
     sh "${gradleExecutablePath} ${args}"
 }
 
-def java(args) {
-    String javaExecutablePath = tool('java8');
-    sh "${javaExecutablePath} ${args}"
-}
+//def java(args) {
+//    String javaExecutablePath = tool('java8');
+//    sh "${javaExecutablePath} ${args}"
+//}
