@@ -12,8 +12,17 @@ node ('docker-cloud') {
         }
 
         stage('docker-cleanup'){
-            docker 'rm -f play_with_pipes'
-            docker 'rmi $(sudo docker images --format "{{.ID}} {{.Repository}}" | awk \'$2 ~ /play_with_pipes$/ { print $1 }\')'
+            try {
+                docker 'rm -f play_with_pipes'
+            } catch (err){
+                echo "remove container: ${err}"
+            }
+
+            try{
+                docker 'rmi $(sudo docker images --format "{{.ID}} {{.Repository}}" | awk \'$2 ~ /play_with_pipes$/ { print $1 }\')'
+            } catch (err){
+                echo "remove image: ${err}"
+            }
         }
 
         stage('build-docker'){
