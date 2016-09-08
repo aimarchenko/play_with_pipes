@@ -11,7 +11,7 @@ node ('docker-cloud') {
 stage 'deploy'
 node ('docker-cloud') {
     step 'start app'
-    java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log'
+    java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
 }
 
 def gradle(args) {
