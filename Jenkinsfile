@@ -12,11 +12,11 @@ node ('docker-cloud') {
         }
 
         stage('build-docker'){
-            docker 'build .'
+            docker 'build -t play_with_pipes .'
         }
 
         stage('deploy'){
-            docker 'run -p 9080:9080 play_with_pipes:latest'
+            docker 'run -p 9080:9080 play_with_pipes'
 
 //            java '-jar /home/vagrant/release/default/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }
