@@ -1,10 +1,16 @@
 #!groovy
 
-stage 'Dev'
+stage 'build'
 node ('docker-cloud') {
-    sh 'env';
+    step 'checkout from git'
     checkout scm
+    step 'gradle building'
     gradle 'clean build -x test'
+}
+
+stage 'deploy'
+node ('docker-cloud') {
+    step 'start app'
     java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log'
 }
 
