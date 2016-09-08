@@ -7,13 +7,13 @@ node ('docker-cloud') {
             checkout scm
         }
 
-        stage ('cleanup'){
-            try {
-                sh 'pkill -f \'play_with_pipes*\''
-            } catch (err){
-                echo "error during execution ${err}"
-            }
-        }
+//        stage ('cleanup'){
+//            try {
+//                sh 'pkill -f \'play_with_pipes*\''
+//            } catch (err){
+//                echo "error during execution ${err}"
+//            }
+//        }
 
         stage('build'){
             gradle 'clean build -x test'
