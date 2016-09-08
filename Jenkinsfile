@@ -22,7 +22,7 @@ node ('docker-cloud') {
     } catch (err){
 
         stage('send notification'){
-            echo 'error occurred: ${err}'
+            echo "error occurred: ${err}"
 //            mail body: "project build error: ${err}" ,
 //                    from: 'xxxx@yyyy.com',
 //                    replyTo: 'yyyy@yyyy.com',
