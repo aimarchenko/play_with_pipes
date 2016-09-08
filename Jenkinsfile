@@ -30,7 +30,7 @@ node ('docker-cloud') {
         }
 
         stage('deploy'){
-            docker 'run -p 9080:9080 play_with_pipes'
+            sh 'make deploy-docker'
 
 //            java '-jar /home/vagrant/release/default/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }

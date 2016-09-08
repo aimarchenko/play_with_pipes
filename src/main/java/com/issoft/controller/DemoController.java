@@ -15,6 +15,6 @@ public class DemoController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String demo(){
-        return String.valueOf("now is  " + new Date());
+        return String.valueOf("now IN DOCKER is  " + new Date());
     }
 }
