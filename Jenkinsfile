@@ -12,6 +12,7 @@ node ('docker-cloud') {
         }
 
         stage('deploy'){
+            sh 'pkill -f \'play_with_pipes*\''
             java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }
 
