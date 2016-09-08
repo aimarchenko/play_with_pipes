@@ -43,7 +43,7 @@ def gradle(args) {
 }
 
 def docker(args) {
-    String dockerExecutablePath = tool('docker');
+    String dockerExecutablePath = tool('docker.io');
     sh "${dockerExecutablePath} ${args}"
 }
 
