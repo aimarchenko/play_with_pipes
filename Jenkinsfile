@@ -7,16 +7,16 @@ node ('docker-cloud') {
             checkout scm
         }
 
-        stage('build'){
+        stage('build-java'){
             gradle 'clean build -x test'
         }
 
+        stage('build-docker'){
+            docker 'build .'
+        }
+
         stage('deploy'){
-            try{
-                sh 'make deploy-default'
-            } catch (err){
-                error "${err}"
-            }
+            docker 'run -p 9080:9080 play_with_pipes:latest'
 
 //            java '-jar /home/vagrant/release/default/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }
@@ -40,6 +40,11 @@ node ('docker-cloud') {
 def gradle(args) {
     String gradleExecutablePath = tool('gradle30');
     sh "${gradleExecutablePath} ${args}"
+}
+
+def docker(args) {
+    String dockerExecutablePath = tool('docker');
+    sh "${dockerExecutablePath} ${args}"
 }
 
 //def java(args) {
