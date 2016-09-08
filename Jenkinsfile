@@ -7,12 +7,15 @@ node ('docker-cloud') {
             checkout scm
         }
 
+        stage ('cleanup'){
+            sh 'pkill -f \'play_with_pipes*\''
+        }
+
         stage('build'){
             gradle 'clean build -x test'
         }
 
         stage('deploy'){
-            sh 'pkill -f \'play_with_pipes*\''
             java '-jar ./build/libs/play_with_pipes-1.0-SNAPSHOT.jar > app.log &'
         }
 
