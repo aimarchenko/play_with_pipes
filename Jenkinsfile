@@ -11,6 +11,11 @@ node ('docker-cloud') {
             gradle 'clean build -x test'
         }
 
+        stage('docker-cleanup'){
+            docker 'rm -f play_with_pipes'
+            docker 'rmi $(sudo docker images --format "{{.ID}} {{.Repository}}" | awk \'$2 ~ /play_with_pipes$/ { print $1 }\')'
+        }
+
         stage('build-docker'){
             docker 'build -t play_with_pipes .'
         }
@@ -44,7 +49,7 @@ def gradle(args) {
 
 def docker(args) {
     String dockerExecutablePath = tool('docker.io');
-    sh "${dockerExecutablePath} ${args}"
+    sh "sudo ${dockerExecutablePath} ${args}"
 }
 
 //def java(args) {
