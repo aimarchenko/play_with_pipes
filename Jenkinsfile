@@ -8,7 +8,11 @@ node ('docker-cloud') {
         }
 
         stage ('cleanup'){
-            sh 'pkill -f \'play_with_pipes*\''
+            try {
+                sh 'pkill -f \'play_with_pipes*\''
+            } catch (err){
+                echo "error during execution ${err}"
+            }
         }
 
         stage('build'){
